@@ -12,21 +12,6 @@
 
 <body>
   <div class="login">
-    <!-- <h1>Predict Salary Analysis</h1>
-
-    <form action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
-      <input type="text" name="prompt" placeholder="text" required="required" />
-      <input type="file" name="image" id="image" accept="image/*" required="required" />
-      <button type="submit" class="btn btn-primary btn-block btn-large">Upload Image</button>
-    </form> -->
-
-    <!-- <br>
-
-
-    <br>
-    <br>
-
-    {{ prediction_text }} -->
 
     <h1>StyleSync</h1>
 
@@ -34,26 +19,10 @@
 
       <label for="text_prompt">Provide us a prompt</label>
         <input type="text" name="text_prompt" id="text_prompt">
-        
-    <!-- </form> -->
-
-
-    <!-- <form id="uploadForm" method="POST" enctype="multipart/form-data" action="/generate"> -->
+      
         <label for="photo">Choose an option for your picture:</label>
         <input type="file" name="photo" accept="image/*">
-        <!-- <label for="capture">or</label></form> -->
-<!--         
-    <video id="cameraPreview" width="320" height="240" autoplay muted></video>
-        <button type="button" onclick="startCapture()">Start Preview</button>
-        <button type="button" onclick="captureImage()" style="display: none;">Capture</button>
-        <canvas id="capturedCanvas" width="320" height="240" style="display: none;"></canvas>
-        <img id="capturedImagePreview" width="320" height="240" style="display: none;">
-        <input type="hidden" name="camera_photo" id="camera_photo" value=""> -->
-        <br>
-        <!-- <label for="text_prompt">Enter Text Prompt:</label>
-        
-        <input type="text" name="text_prompt" id="text_prompt">
-        <br> -->
+
         </form>
     <button type="submit" onclick="generate()">Submit</button></div>
 </div>
@@ -90,84 +59,5 @@
   }
 </script>
 
-<!-- <script>
-  function setGenerateEndpoint() {
-      // Get the selected file input
-      var fileInput = document.querySelector('input[name="photo"]');
-      console.log('file input js',fileInput.files[0]);
-      // Check if a file is selected
-      if (fileInput.files.length > 0) {
-          // Set the action attribute dynamically based on the selected file
-          document.getElementById('uploadForm').action = "/generate";
-      } else {
-          alert("Please upload an image before generating.");
-      }
-
-      // Submit the form
-      document.getElementById('uploadForm').submit();
-  }
-</script> -->
-<!-- <script> -->
-
-<!-- 
-  // let isPreviewing = false;
-
-  // function startCapture() {
-  //     const constraints = {
-  //         video: true
-  //     };
-
-  //     navigator.mediaDevices.getUserMedia(constraints)
-  //         .then((stream) => {
-  //             const video = document.getElementById('cameraPreview');
-  //             const capturedCanvas = document.getElementById('capturedCanvas');
-  //             const capturedImagePreview = document.getElementById('capturedImagePreview');
-  //             const photoInput = document.getElementById('camera_photo');
-  //             const captureButton = document.querySelector('button[onclick="captureImage()"]');
-
-  //             video.srcObject = stream;
-  //             video.play();
-
-  //             video.style.display = 'block';
-
-  //             video.addEventListener('loadeddata', () => {
-  //                 capturedCanvas.width = video.videoWidth;
-  //                 capturedCanvas.height = video.videoHeight;
-  //                 const context = capturedCanvas.getContext('2d');
-  //                 context.drawImage(video, 0, 0, capturedCanvas.width, capturedCanvas.height);
-
-  //                 captureButton.style.display = 'block';
-
-  //                 isPreviewing = true;
-  //             });
-  //         })
-  //         .catch((error) => {
-  //             console.error('Error accessing camera:', error);
-  //         });
-  // }
-
-  // function captureImage() {
-  //     if (isPreviewing) {
-  //         const video = document.getElementById('cameraPreview');
-  //         const capturedCanvas = document.getElementById('capturedCanvas');
-  //         const capturedImagePreview = document.getElementById('capturedImagePreview');
-  //         const photoInput = document.getElementById('camera_photo');
-
-  //         const context = capturedCanvas.getContext('2d');
-  //         context.drawImage(video, 0, 0, capturedCanvas.width, capturedCanvas.height);
-
-  //         const photoDataUrl = capturedCanvas.toDataURL('image/png');
-  //         photoInput.value = photoDataUrl;
-
-  //         capturedImagePreview.src = photoDataUrl;
-  //         capturedImagePreview.style.display = 'block';
-
-  //         video.style.display = 'none';
-  //         capturedCanvas.style.display = 'none';
-
-  //         isPreviewing = false;
-  //     }
-  // } -->
-<!-- </script> -->
 </body>
 </html>

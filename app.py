@@ -24,7 +24,7 @@ import os
 app = Flask(_name_)
 
 # # Set the device
-device = "cpu"
+device = "cuda"
 model_path = "runwayml/stable-diffusion-inpainting"
 
 # Load the stable diffusion model
@@ -69,7 +69,7 @@ def generate():
     if photo:
         # Save the uploaded file to a temporary location
         filename = secure_filename(photo.filename)
-        file_path = os.path.join('C:/Khyathi/MS DS/Capstone/StyleSync/Deployment-flask-master/', filename)
+        file_path = os.path.join('/', filename)
         photo.save(file_path)
 
         # Open the file using PIL
@@ -203,5 +203,5 @@ def predict_api():
     output = prediction[0]
     return jsonify(output)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
