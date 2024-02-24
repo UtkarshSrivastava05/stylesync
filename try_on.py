@@ -42,6 +42,17 @@ def find_original_index(text_prompt, id2label, cloth_mapping):
                 return index
     return None
 
+def image_grid(imgs, rows, cols):
+    assert len(imgs) == rows*cols
+
+    w, h = imgs[1].size
+    grid = PIL.Image.new('RGB', size=(cols*w, rows*h))
+    grid_w, grid_h = grid.size
+
+    for i, img in enumerate(imgs):
+        grid.paste(img, box=(i%cols*w, i//cols*h))
+    return grid
+
 # Sample text prompt
 prompt = "Change the shirt to a black kurta, with the Spider-Man on it."
 
@@ -103,6 +114,11 @@ images = pipe(
     generator=generator,
     num_images_per_prompt=num_samples,
 ).images
+
+image_org = image.resize(tuple(reversed(org_img_size)))
+
+# insert initial image in the list so we can compare side by side
+images.insert(0, image_org)
 
 # Resize generated images to the original image size
 for i in range(len(images)):

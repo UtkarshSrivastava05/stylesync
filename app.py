@@ -1,9 +1,3 @@
-# import pickle
-
-
-# model = pickle.load(open('model.pkl', 'rb'))
-
-
 # Import necessary libraries
 import PIL
 import requests
@@ -16,14 +10,14 @@ from diffusers import StableDiffusionInpaintPipeline
 from transformers import SegformerImageProcessor, AutoModelForSemanticSegmentation
 from PIL import Image
 import torch.nn as nn
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from werkzeug.utils import secure_filename
 from PIL import Image
 import os
 
 app = Flask(_name_)
 
-# # Set the device
+# Set the device
 device = "cuda"
 model_path = "runwayml/stable-diffusion-inpainting"
 
@@ -54,15 +48,34 @@ def find_original_index(text_prompt, id2label, cloth_mapping):
                 return index
     return None
 
-@app.route('/')
+def image_grid(imgs, rows, cols):
+    assert len(imgs) == rows*cols
+
+    w, h = imgs[1].size
+    grid = PIL.Image.new('RGB', size=(cols*w, rows*h))
+    grid_w, grid_h = grid.size
+
+    for i, img in enumerate(imgs):
+        grid.paste(img, box=(i%cols*w, i//cols*h))
+    return grid
+
+app = Flask(__name__,
+            template_folder='/content/stylesync/templates',
+            static_folder='/content/stylesync/static'
+      )
+
+@app.route("/")
 def home():
-    return render_template('index_new.html')
+    return render_template("index_new.html")
 
 @app.route('/generate', methods=['POST'])
 def generate():
     # Access the uploaded file and prompt from the request
     photo = request.files['photo']
     prompt = request.form['text_prompt']
+
+    # Redirect to the loading page while processing
+    return redirect(url_for('loading'))
 
     print('prompt first',prompt)
 
@@ -80,6 +93,7 @@ def generate():
         # image.show()
     print('type of photo',type(image))
     print('photo printing',image)
+
     # Sample text prompt
     # prompt = "Change the shirt to a black kurta, with the Spider-Man on it."
     # prompt = request.form('text_prompt')
@@ -160,48 +174,53 @@ def generate():
         num_images_per_prompt=num_samples,
     ).images
 
+    image_org = image.resize(tuple(reversed(org_img_size)))
+
+    # insert initial image in the list so we can compare side by side
+    images.insert(0, image_org)
+    
     # Resize generated images to the original image size
     for i in range(len(images)):
         images[i] = images[i].resize(tuple(reversed(org_img_size)))
 
     # Display the image grid
-    image_grid(images, 1, num_samples + 1)
+    generated_images = image_grid(images, 1, num_samples + 1)
+
+    # Redirect to the result page
+    return render_template("result.html")
 
 
+    # return jsonify({'status': 'success', 'message': 'Image and prompt received successfully'})
+
+# @app.route('/upload_image',methods=['POST'])
+# def upload_image():
+#     # Get the uploaded file
+#     uploaded_file = request.files['image']
+
+#     return render_template('index_new.html', prediction_text='Employee image should be $ {}'.format(output))
 
 
+# @app.route('/predict_api',methods=['POST'])
+# def predict_api():
+#     '''
+#     For direct API calls trought request
+#     '''
+#     data = request.get_json(force=True)
+#     prediction = model.predict([np.array(list(data.values()))])
 
-    # '''
-    # For rendering results on HTML GUI
-    # '''
-    # int_features = [int(x) for x in request.form.values()]
-    # final_features = [np.array(int_features)]
-    # prediction = model.predict(final_features)
+#     output = prediction[0]
+#     return jsonify(output)
 
-    # output = round(prediction[0], 2)
+# Add routes for the loading and result pages
+@app.route('/loading')
+def loading():
+    return render_template("loading.html")
 
-    # return render_template('index_new.html', prediction_text='Employee Salary should be $ {}'.format(output))
-
-    return jsonify({'status': 'success', 'message': 'Image and prompt received successfully'})
-
-@app.route('/upload_image',methods=['POST'])
-def upload_image():
-    # Get the uploaded file
-    uploaded_file = request.files['image']
-
-    return render_template('index_new.html', prediction_text='Employee image should be $ {}'.format(output))
-
-
-@app.route('/predict_api',methods=['POST'])
-def predict_api():
-    '''
-    For direct API calls trought request
-    '''
-    data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
-
-    output = prediction[0]
-    return jsonify(output)
+@app.route('/result')
+def result():
+    # You may need to pass dynamic data to the result template, e.g., image path
+    image_path = url_for('static', filename='result.jpg')
+    return render_template("result.html", image_path=image_path)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
