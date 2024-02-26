@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <title>Text and Photo Form</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+
+    <meta charset="UTF-8">
+    <title>Generating Images...</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generating Images...</h1>
+    <img src="/static/Loading_icon.gif" alt="Loading">
+    <script>
+    // window.location.href = "/generate?text={{ text }}&filename={{ filename }}";
+    // window.location.href = "/generate?text={{ text }}&image_data={{ image_data }}";
+    window.location.href = "/generate?text={{ text }}&image_url={{ image_url }}";
+
+  </script>
+</body>
+</html>
