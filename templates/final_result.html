@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+    <title> Stylesync App </title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Gallery</title>
     <style>
-        .image-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+      
         .image-container img {
-            width: 200px; /* adjust the size as needed */
-            height: auto;
-            margin: 10px;
+            width: 250px; /* adjust the size as needed */
+            height: 50vh;
+            margin: 5px;
+            
         }
+
+      
     </style>
+      <h2 style="color: white; background-color: black;">!!! StyleSync !!!</h2>
+      <h6 style="color: white; text-align: right; width: 67%; margin-top: -20px;"> <> TRY BEFORE YOU BUY <>  </h6>
+    
 </head>
 <body>
+
     <div class="image-container">
+      <br>
         {% for image in images %}
-            <img src="{{ image }}" alt="{{ image }}">
+            <img src="{{ image }}" alt="{{ image }}" >
         {% endfor %}
     </div>
 </body>
+<footer>
+    <p style="color: darksalmon; padding: 10px; position: fixed; bottom: 0; right: 0; text-align: right; width: 100%; font-size: xx-small;"> Developed By : Balaji, Deepa, Khyathi, Utkarsh.</p>
+
+  </footer>
 </html>
