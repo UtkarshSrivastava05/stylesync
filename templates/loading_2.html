@@ -1,35 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- <title>Text and Photo Form</title>
+
+  <style>
+    div{
+  
+  position: absolute;
+  top: 50%;
+  left:40%;
+  margin: -150px 0 0 -150px;
+  width:600px;
+  height:230px;
+  text-align:center;
+  background-color: black;
+  
+}
+input {
+            padding: 5px 10px;
+          }
+</style>
+
+  <meta charset="UTF-8">
+  <title>Stylesync App</title>
+  <h2 style="color: white; background-color: black;">!!! StyleSync !!!</h2>
+  <h6 style="color: white; text-align: right; width: 67%; margin-top: -20px;"> <> TRY BEFORE YOU BUY <>  </h6>
+
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <meta charset="UTF-8">
-    <title>Generating Images...</title>
+  
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-    <style>
-        body {
-            text-align: center;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+
 </head>
+<footer>
+    <p style="color: darksalmon; padding: 10px; position: fixed; bottom: 0; right: 0; text-align: right; width: 100%; font-size: xx-small;"> Developed By : Balaji, Deepa, Khyathi, Utkarsh.</p>
+</footer>
 <body>
-    <h1>Generating Images...</h1>
-    <img src="/static/Loading_icon.gif" alt="Loading">
+  <div> 
+    <h3>Please wait, your style creation is in progress...              </h3>
+    <img src="/static/loading_tr_gif.gif" alt="Loading" height=100px; width=100px>
     <script>
     // window.location.href = "/generate?text={{ text }}&filename={{ filename }}";
     // window.location.href = "/generate?text={{ text }}&image_data={{ image_data }}";
     window.location.href = "/generate?text={{ text }}&image_url={{ image_url }}";
 
   </script>
+  </div>
+
 </body>
+
 </html>

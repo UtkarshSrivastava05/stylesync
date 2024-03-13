@@ -1,8 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
+
+  <style> 
+    div{
+      
+      position: absolute;
+      top: 50%;
+      left: 47%;
+      margin: -150px 0 0 -150px;
+      width:400px;
+      height:230px;
+      border: 5px solid grey;
+      text-align:center;
+      
+      
+      
+    }
+    
+    
+      input {
+            padding: 5px 10px;
+          }
+    
+    </style>
+
   <meta charset="UTF-8">
-  <title>Text and Photo Form</title>
+  <title> Stylesync App </title>
+
+  <h2 style="color: white; background-color: black;">!!! Welcome to StyleSync !!!</h2>
+  <h6 style="color: white; text-align: right; width: 67%; margin-top: -20px;"> <> TRY BEFORE YOU BUY <>  </h6>
+
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
@@ -10,6 +38,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+
+</br>
+</br>
+</br>
+  <div>
+  
+
   <form action="{{ url_for('process_form') }}" method="POST" enctype="multipart/form-data">
     <label for="text_input">Provide a Prompt:</label>
     <input type="text" name="text_input" id="text_input" required>
@@ -19,5 +54,10 @@
     <br>
     <button type="submit">Submit</button>
   </form>
+
+</div>
 </body>
+<footer>
+  <p style="color: darksalmon; padding: 10px; position: fixed; bottom: 0; right: 0; text-align: right; width: 100%; font-size: xx-small;"> Developed By : Balaji, Deepa, Khyathi, Utkarsh.</p>
+</footer>
 </html>
